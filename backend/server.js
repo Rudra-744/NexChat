@@ -1,6 +1,6 @@
 import "dotenv/config";
-import express from "express";
-import connectDB from "./config/db.js";
+import express, { urlencoded } from "express";
+import connectDB from "./lib/db.js";
 import authRoute from "./routes/auth.route.js"
 import messageRoute from "./routes/message.route.js"
 import path from "path";
@@ -8,7 +8,8 @@ import path from "path";
 const app = express();
 const PORT = process.env.PORT || 3000;
 const __dirname = path.resolve();
-
+app.use(express.json());
+app.use(urlencoded({extended:true}));
 
 
 app.use("/api/auth",authRoute);
@@ -21,6 +22,7 @@ if(process.env.NODE_ENV === "production"){
         res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
     });
 }
+
 
 
 app.listen(PORT, async () => {

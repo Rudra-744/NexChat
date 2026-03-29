@@ -6,8 +6,8 @@ export const connectDB = async () => {
         console.log(`MongoDB Connected ✅`);
     } catch (error) {
         console.log(`Error connecting to database: ${error.message}`);
-        process.exit(1);
-    }
+        process.exit(1); //1 status code means fail ,0 means success
+     }
 }
 
 
